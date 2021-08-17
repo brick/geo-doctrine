@@ -1,0 +1,32 @@
+{
+    "name": "brick/geo-doctrine",
+    "description": "Doctrine types & functions for brick/geo",
+    "type": "library",
+    "keywords": [
+        "Brick",
+        "Geo",
+        "Doctrine"
+    ],
+    "license": "MIT",
+    "require": {
+        "brick/geo": "dev-master",
+        "doctrine/orm": "^2.0"
+    },
+    "require-dev": {
+        "doctrine/data-fixtures": "^1.0",
+        "phpunit/phpunit": "^8.0 || ^9.0",
+        "php-coveralls/php-coveralls": "^2.0",
+        "vimeo/psalm": "4.3.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Brick\\Geo\\Doctrine\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "": "stubs/",
+            "Brick\\Geo\\Doctrine\\Tests\\": "tests/"
+        }
+    }
+}
