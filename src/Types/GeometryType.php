@@ -57,7 +57,7 @@ class GeometryType extends Type
 
     public function getSQLDeclaration(array $column, AbstractPlatform $platform)
     {
-        if ($platform instanceof PostgreSqlPlatform) {
+        if ($platform->getName() === 'postgresql') {
             return 'GEOMETRY';
         }
 
@@ -106,7 +106,7 @@ class GeometryType extends Type
 
     public function convertToDatabaseValueSQL($sqlExpr, AbstractPlatform $platform)
     {
-        if ($platform instanceof MySqlPlatform) {
+        if ($platform->getName() === 'mysql') {
             $sqlExpr = sprintf('BINARY %s', $sqlExpr);
         }
 

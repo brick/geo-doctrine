@@ -13,6 +13,7 @@
         "doctrine/orm": "^2.0"
     },
     "require-dev": {
+        "doctrine/cache": "^1.11",
         "doctrine/data-fixtures": "^1.0",
         "phpunit/phpunit": "^8.0 || ^9.0",
         "php-coveralls/php-coveralls": "^2.0",

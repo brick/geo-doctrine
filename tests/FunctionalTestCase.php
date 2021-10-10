@@ -6,23 +6,22 @@ namespace Brick\Geo\Doctrine\Tests;
 
 use Brick\Geo\Point;
 use Brick\Geo\Doctrine\Tests\Fixtures;
-use Brick\Geo\Engine\GeometryEngineRegistry;
-use Brick\Geo\Engine\PDOEngine;
 
 use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\DataFixtures\Loader;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
+use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Tools\SchemaTool;
 use Doctrine\ORM\Tools\Setup;
-use Doctrine\Tests\DbalFunctionalTestCase;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Base class for Doctrine types functional test cases.
  */
-abstract class FunctionalTestCase extends DbalFunctionalTestCase
+abstract class FunctionalTestCase extends TestCase
 {
     private AbstractPlatform $platform;
 
@@ -32,21 +31,15 @@ abstract class FunctionalTestCase extends DbalFunctionalTestCase
 
     private ORMExecutor $ormExecutor;
 
+    /** @var Connection */
+    private $connection;
+
     protected function setUp(): void
     {
-        if (! GeometryEngineRegistry::has()) {
-            self::markTestSkipped('This test requires a connection to a database.');
-        }
-
-        $engine = GeometryEngineRegistry::get();
-
-        if (! $engine instanceof PDOEngine) {
-            self::markTestSkipped('This test currently only works with a PDO connection.');
-        }
-
         parent::setUp();
 
-        $this->platform = $this->_conn->getDatabasePlatform();
+        $this->connection = TestUtil::getConnection();
+        $this->platform = $this->connection->getDatabasePlatform();
 
         $this->platform->registerDoctrineTypeMapping('geometry', 'binary');
         $this->platform->registerDoctrineTypeMapping('linestring', 'binary');
@@ -58,14 +51,15 @@ abstract class FunctionalTestCase extends DbalFunctionalTestCase
 
         switch ($this->platform->getName()) {
             case 'postgresql':
-                $this->_conn->executeQuery('CREATE EXTENSION IF NOT EXISTS postgis;');
+                $this->connection->executeQuery('CREATE EXTENSION IF NOT EXISTS postgis;');
                 break;
         }
+
         $this->fixtureLoader = new Loader();
 
         $config = Setup::createAnnotationMetadataConfiguration([__DIR__ . '/Fixtures'], false);
 
-        $this->em = EntityManager::create($this->_conn, $config, $this->platform->getEventManager());
+        $this->em = EntityManager::create($this->connection, $config, $this->platform->getEventManager());
         $schemaTool = new SchemaTool($this->em);
 
         $schemaTool->updateSchema([
