@@ -9,7 +9,7 @@
     ],
     "license": "MIT",
     "require": {
-        "brick/geo": "dev-master",
+        "brick/geo": "~0.7.0",
         "doctrine/orm": "^2.8"
     },
     "require-dev": {
