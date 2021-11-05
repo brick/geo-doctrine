@@ -9,6 +9,7 @@
     ],
     "license": "MIT",
     "require": {
+        "php": "^7.4 || ^8.0",
         "brick/geo": "~0.7.0",
         "doctrine/orm": "^2.8"
     },
