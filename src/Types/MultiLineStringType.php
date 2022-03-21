@@ -11,7 +11,7 @@ use Brick\Geo\Proxy\MultiLineStringProxy;
  */
 class MultiLineStringType extends GeometryType
 {
-    public function getName()
+    public function getName() : string
     {
         return 'MultiLineString';
     }

@@ -50,12 +50,12 @@ class GeometryType extends Type
         return true;
     }
 
-    public function getName()
+    public function getName() : string
     {
         return 'Geometry';
     }
 
-    public function getSQLDeclaration(array $column, AbstractPlatform $platform)
+    public function getSQLDeclaration(array $column, AbstractPlatform $platform) : string
     {
         if ($platform->getName() === 'postgresql') {
             return 'GEOMETRY';
@@ -64,7 +64,7 @@ class GeometryType extends Type
         return strtoupper($this->getName());
     }
 
-    public function convertToPHPValue($value, AbstractPlatform $platform)
+    public function convertToPHPValue($value, AbstractPlatform $platform) : ?Geometry
     {
         /** @var string|resource|null $value */
         if ($value === null) {
@@ -89,7 +89,7 @@ class GeometryType extends Type
         return new $proxyClassName($value, true, self::$srid);
     }
 
-    public function convertToDatabaseValue($value, AbstractPlatform $platform)
+    public function convertToDatabaseValue($value, AbstractPlatform $platform) : ?string
     {
         if ($value === null) {
             return null;
@@ -104,7 +104,7 @@ class GeometryType extends Type
         throw new \UnexpectedValueException(sprintf('Expected %s, got %s.', Geometry::class, $type));
     }
 
-    public function convertToDatabaseValueSQL($sqlExpr, AbstractPlatform $platform)
+    public function convertToDatabaseValueSQL($sqlExpr, AbstractPlatform $platform) : string
     {
         if ($platform->getName() === 'mysql') {
             $sqlExpr = sprintf('BINARY %s', $sqlExpr);
@@ -113,22 +113,22 @@ class GeometryType extends Type
         return sprintf('ST_GeomFromWKB(%s, %d)', $sqlExpr, self::$srid);
     }
 
-    public function convertToPHPValueSQL($sqlExpr, $platform)
+    public function convertToPHPValueSQL($sqlExpr, $platform) : string
     {
         return sprintf('ST_AsBinary(%s)', $sqlExpr);
     }
 
-    public function canRequireSQLConversion()
+    public function canRequireSQLConversion() : bool
     {
         return true;
     }
 
-    public function requiresSQLCommentHint(AbstractPlatform $platform)
+    public function requiresSQLCommentHint(AbstractPlatform $platform) : bool
     {
         return true;
     }
 
-    public function getBindingType()
+    public function getBindingType() : int
     {
         return \PDO::PARAM_LOB;
     }
