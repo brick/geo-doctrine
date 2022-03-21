@@ -20,7 +20,7 @@ class MultiPointEntity
     private int $id;
 
     /**
-     * @Column(type="multipoint")
+     * @Column(type="MultiPoint")
      */
     private MultiPoint $multiPoint;
 

@@ -20,7 +20,7 @@ class MultiLineStringEntity
     private int $id;
 
     /**
-     * @Column(type="multilinestring")
+     * @Column(type="MultiLineString")
      */
     private MultiLineString $multiLineString;
 

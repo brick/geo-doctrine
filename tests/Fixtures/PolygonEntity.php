@@ -20,7 +20,7 @@ class PolygonEntity
     private int $id;
 
     /**
-     * @Column(type="polygon")
+     * @Column(type="Polygon")
      */
     private Polygon $polygon;
 

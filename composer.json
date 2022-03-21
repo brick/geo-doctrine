@@ -14,6 +14,7 @@
         "doctrine/orm": "^2.8"
     },
     "require-dev": {
+        "doctrine/annotations": "^1.0",
         "doctrine/cache": "^1.11",
         "doctrine/data-fixtures": "^1.0",
         "phpunit/phpunit": "^9.0",

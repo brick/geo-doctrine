@@ -20,7 +20,7 @@ class MultiPolygonEntity
     private int $id;
 
     /**
-     * @Column(type="multipolygon")
+     * @Column(type="MultiPolygon")
      */
     private MultiPolygon $multiPolygon;
 

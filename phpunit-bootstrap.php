@@ -15,13 +15,13 @@ use Doctrine\DBAL\Types\Type;
     $classLoader->loadClass('Doctrine\Tests\DbalFunctionalTestCase');
     $classLoader->loadClass('Doctrine\Tests\DBAL\Mocks\MockPlatform');
 
-    Type::addType('geometry', Types\GeometryType::class);
-    Type::addType('linestring', Types\LineStringType::class);
-    Type::addType('multilinestring', Types\MultiLineStringType::class);
-    Type::addType('multipoint', Types\MultiPointType::class);
-    Type::addType('multipolygon', Types\MultiPolygonType::class);
-    Type::addType('point', Types\PointType::class);
-    Type::addType('polygon', Types\PolygonType::class);
+    Type::addType('Geometry', Types\GeometryType::class);
+    Type::addType('LineString', Types\LineStringType::class);
+    Type::addType('MultiLineString', Types\MultiLineStringType::class);
+    Type::addType('MultiPoint', Types\MultiPointType::class);
+    Type::addType('MultiPolygon', Types\MultiPolygonType::class);
+    Type::addType('Point', Types\PointType::class);
+    Type::addType('Polygon', Types\PolygonType::class);
 
     $driver = getenv('DRIVER');
 

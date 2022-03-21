@@ -20,7 +20,7 @@ class GeometryEntity
     private int $id;
 
     /**
-     * @Column(type="geometry")
+     * @Column(type="Geometry")
      */
     private Geometry $geometry;
 

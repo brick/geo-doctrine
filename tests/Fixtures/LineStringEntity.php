@@ -20,7 +20,7 @@ class LineStringEntity
     private int $id;
 
     /**
-     * @Column(type="linestring")
+     * @Column(type="LineString")
      */
     private LineString $lineString;
 

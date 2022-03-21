@@ -20,7 +20,7 @@ class PointEntity
     private int $id;
 
     /**
-     * @Column(type="point")
+     * @Column(type="Point")
      */
     private Point $point;
 
