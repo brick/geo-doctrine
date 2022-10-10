@@ -8,9 +8,9 @@ use Brick\Geo\Geometry;
 use Brick\Geo\IO\WKBReader;
 use Brick\Geo\Proxy\GeometryProxy;
 use Brick\Geo\Proxy\ProxyInterface;
-use Doctrine\DBAL\Platforms\MySqlPlatform;
+use Doctrine\DBAL\Platforms\AbstractMySQLPlatform;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
-use Doctrine\DBAL\Platforms\PostgreSqlPlatform;
+use Doctrine\DBAL\Platforms\PostgreSQLPlatform;
 use Doctrine\DBAL\Types\Type;
 
 /**
@@ -57,7 +57,7 @@ class GeometryType extends Type
 
     public function getSQLDeclaration(array $column, AbstractPlatform $platform) : string
     {
-        if ($platform->getName() === 'postgresql') {
+        if ($platform instanceof PostgreSQLPlatform) {
             return 'GEOMETRY';
         }
 
@@ -106,7 +106,7 @@ class GeometryType extends Type
 
     public function convertToDatabaseValueSQL($sqlExpr, AbstractPlatform $platform) : string
     {
-        if ($platform->getName() === 'mysql') {
+        if ($platform instanceof AbstractMySQLPlatform) {
             $sqlExpr = sprintf('BINARY %s', $sqlExpr);
         }
 
