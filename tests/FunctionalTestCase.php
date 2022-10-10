@@ -31,8 +31,7 @@ abstract class FunctionalTestCase extends TestCase
 
     private ORMExecutor $ormExecutor;
 
-    /** @var Connection */
-    private $connection;
+    private Connection $connection;
 
     protected function setUp(): void
     {
