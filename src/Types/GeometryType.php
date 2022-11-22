@@ -99,9 +99,7 @@ class GeometryType extends Type
             return $value->asBinary();
         }
 
-        $type = is_object($value) ? get_class($value) : gettype($value);
-
-        throw new \UnexpectedValueException(sprintf('Expected %s, got %s.', Geometry::class, $type));
+        throw new \UnexpectedValueException(sprintf('Expected %s, got %s.', Geometry::class, get_debug_type($value)));
     }
 
     public function convertToDatabaseValueSQL($sqlExpr, AbstractPlatform $platform) : string
