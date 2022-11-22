@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.2.1](https://github.com/brick/geo-doctrine/releases/tag/0.2.1) - 2022-11-22
+
+✨ **Improvements**
+
+- Compatibility with `brick/geo` version `0.9`
+
 ## [0.2.0](https://github.com/brick/geo-doctrine/releases/tag/0.2.0) - 2022-10-11
 
 💥 **Breaking changes**
