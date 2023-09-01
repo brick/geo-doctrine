@@ -28,7 +28,6 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "": "stubs/",
             "Brick\\Geo\\Doctrine\\Tests\\": "tests/"
         }
     }
