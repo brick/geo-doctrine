@@ -17,8 +17,9 @@
         "doctrine/annotations": "^1.0",
         "doctrine/cache": "^1.11",
         "doctrine/data-fixtures": "^1.0",
+        "guzzlehttp/guzzle": "^7.0",
         "phpunit/phpunit": "^10.5",
-        "php-coveralls/php-coveralls": "^2.0",
+        "php-coveralls/php-coveralls": "^2.7",
         "vimeo/psalm": "5.20.0"
     },
     "autoload": {
