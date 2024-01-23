@@ -7,7 +7,7 @@ on:
 jobs:
   psalm:
     name: Psalm
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
 
     steps:
       - name: Checkout
@@ -16,7 +16,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: "8.1"
+          php-version: "8.3"
 
       - name: Install composer dependencies
         uses: "ramsey/composer-install@v1"
@@ -26,7 +26,7 @@ jobs:
 
   phpunit-mysql:
     name: PHPUnit MySQL
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
 
     strategy:
       matrix:
@@ -88,7 +88,7 @@ jobs:
 
   phpunit-mariadb:
     name: PHPUnit MariaDB
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
 
     strategy:
       matrix:
@@ -133,7 +133,7 @@ jobs:
 
   phpunit-postgres:
     name: PHPUnit PostgreSQL
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
 
     strategy:
       matrix:
