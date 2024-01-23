@@ -1,6 +1,6 @@
 # Changelog
 
-## UNRELEASED (0.3.0)
+## [0.3.0](https://github.com/brick/geo-doctrine/releases/tag/0.3.0) - 2024-01-23
 
 💥 **Breaking changes**
 
