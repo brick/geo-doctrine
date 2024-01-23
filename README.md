@@ -30,7 +30,7 @@ composer require brick/geo-doctrine
 Requirements
 ------------
 
-This library requires PHP 7.4 or PHP 8.
+This library requires PHP 8.1.
 
 Project status & release process
 --------------------------------
