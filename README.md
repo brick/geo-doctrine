@@ -8,6 +8,7 @@ Doctrine types & functions for [brick/geo](https://github.com/brick/geo)
 [![Build Status](https://github.com/brick/geo-doctrine/workflows/CI/badge.svg)](https://github.com/brick/geo-doctrine/actions)
 [![Coverage Status](https://coveralls.io/repos/github/brick/geo-doctrine/badge.svg?branch=master)](https://coveralls.io/github/brick/geo-doctrine?branch=master)
 [![Latest Stable Version](https://poser.pugx.org/brick/geo-doctrine/v/stable)](https://packagist.org/packages/brick/geo-doctrine)
+[![Total Downloads](https://poser.pugx.org/brick/geo-doctrine/downloads)](https://packagist.org/packages/brick/geo-doctrine)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](http://opensource.org/licenses/MIT)
 
 Introduction
