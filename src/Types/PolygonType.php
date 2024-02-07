@@ -11,7 +11,7 @@ use Brick\Geo\Proxy\PolygonProxy;
  */
 class PolygonType extends GeometryType
 {
-    public function getName() : string
+    protected function getGeometryName() : string
     {
         return 'Polygon';
     }

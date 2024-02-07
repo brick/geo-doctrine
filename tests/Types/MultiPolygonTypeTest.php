@@ -31,7 +31,7 @@ class MultiPolygonTypeTest extends FunctionalTestCase
         $multiPolygonEntity = $repository->findOneBy(['id' => 1]);
         self::assertNotNull($multiPolygonEntity);
 
-        $multiPolygon = $multiPolygonEntity->getMultiPolygon();
+        $multiPolygon = $multiPolygonEntity->multiPolygon;
         self::assertInstanceOf(MultiPolygon::class, $multiPolygon);
         self::assertSame(2, $multiPolygon->numGeometries());
 

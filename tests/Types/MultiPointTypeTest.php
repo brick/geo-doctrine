@@ -30,7 +30,7 @@ class MultiPointTypeTest extends FunctionalTestCase
         $multiPointEntity = $repository->findOneBy(['id' => 1]);
         self::assertNotNull($multiPointEntity);
 
-        $multiPoint = $multiPointEntity->getMultiPoint();
+        $multiPoint = $multiPointEntity->multiPoint;
         self::assertInstanceOf(MultiPoint::class, $multiPoint);
         self::assertSame(3, $multiPoint->numGeometries());
 

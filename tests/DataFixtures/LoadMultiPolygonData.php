@@ -36,7 +36,7 @@ class LoadMultiPolygonData implements FixtureInterface
         $poly2 = Polygon::of($ring2);
 
         $multiPoly1 = new MultiPolygonEntity();
-        $multiPoly1->setMultiPolygon(MultiPolygon::of($poly1, $poly2));
+        $multiPoly1->multiPolygon = MultiPolygon::of($poly1, $poly2);
 
         $manager->persist($multiPoly1);
         $manager->flush();

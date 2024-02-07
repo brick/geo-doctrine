@@ -11,7 +11,7 @@ use Brick\Geo\Proxy\LineStringProxy;
  */
 class LineStringType extends GeometryType
 {
-    public function getName() : string
+    protected function getGeometryName() : string
     {
         return 'LineString';
     }

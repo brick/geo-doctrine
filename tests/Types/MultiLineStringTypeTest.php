@@ -30,7 +30,7 @@ class MultiLineStringTypeTest extends FunctionalTestCase
         $multiLineStringEntity = $repository->findOneBy(['id' => 1]);
         self::assertNotNull($multiLineStringEntity);
 
-        $multiLineString = $multiLineStringEntity->getMultiLineString();
+        $multiLineString = $multiLineStringEntity->multiLineString;
         self::assertInstanceOf(MultiLineString::class, $multiLineString);
         self::assertSame(2, $multiLineString->numGeometries());
 

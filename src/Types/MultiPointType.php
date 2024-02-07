@@ -11,7 +11,7 @@ use Brick\Geo\Proxy\MultiPointProxy;
  */
 class MultiPointType extends GeometryType
 {
-    public function getName() : string
+    protected function getGeometryName() : string
     {
         return 'MultiPoint';
     }

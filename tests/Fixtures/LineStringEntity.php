@@ -5,32 +5,16 @@ declare(strict_types=1);
 namespace Brick\Geo\Doctrine\Tests\Fixtures;
 
 use Brick\Geo\LineString;
+use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @Entity
- * @Table(name="linestrings")
- */
+#[ORM\Entity]
 class LineStringEntity
 {
-    /**
-     * @Id
-     * @Column(type="integer")
-     * @GeneratedValue
-     */
-    private int $id;
+    #[ORM\Id]
+    #[ORM\Column(type: 'integer')]
+    #[ORM\GeneratedValue]
+    public int $id;
 
-    /**
-     * @Column(type="LineString")
-     */
-    private LineString $lineString;
-
-    public function getLineString() : LineString
-    {
-        return $this->lineString;
-    }
-
-    public function setLineString(LineString $lineString) : void
-    {
-        $this->lineString = $lineString;
-    }
+    #[ORM\Column(type: 'LineString')]
+    public LineString $lineString;
 }

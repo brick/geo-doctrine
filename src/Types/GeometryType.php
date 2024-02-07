@@ -4,13 +4,16 @@ declare(strict_types=1);
 
 namespace Brick\Geo\Doctrine\Types;
 
+use Brick\DateTime\LocalDateTime;
 use Brick\Geo\Geometry;
 use Brick\Geo\IO\WKBReader;
 use Brick\Geo\Proxy\GeometryProxy;
 use Brick\Geo\Proxy\ProxyInterface;
+use Doctrine\DBAL\ParameterType;
 use Doctrine\DBAL\Platforms\AbstractMySQLPlatform;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Platforms\PostgreSQLPlatform;
+use Doctrine\DBAL\Types\Exception\InvalidType;
 use Doctrine\DBAL\Types\Type;
 
 /**
@@ -50,7 +53,7 @@ class GeometryType extends Type
         return true;
     }
 
-    public function getName() : string
+    protected function getGeometryName() : string
     {
         return 'Geometry';
     }
@@ -58,10 +61,10 @@ class GeometryType extends Type
     public function getSQLDeclaration(array $column, AbstractPlatform $platform) : string
     {
         if ($platform instanceof PostgreSQLPlatform) {
-            return 'GEOMETRY';
+            return 'Geometry';
         }
 
-        return strtoupper($this->getName());
+        return $this->getGeometryName();
     }
 
     public function convertToPHPValue($value, AbstractPlatform $platform) : ?Geometry
@@ -99,10 +102,14 @@ class GeometryType extends Type
             return $value->asBinary();
         }
 
-        throw new \UnexpectedValueException(sprintf('Expected %s, got %s.', Geometry::class, get_debug_type($value)));
+        throw InvalidType::new(
+            $value,
+            static::class,
+            [Geometry::class, 'null'],
+        );
     }
 
-    public function convertToDatabaseValueSQL($sqlExpr, AbstractPlatform $platform) : string
+    public function convertToDatabaseValueSQL(string $sqlExpr, AbstractPlatform $platform) : string
     {
         if ($platform instanceof AbstractMySQLPlatform) {
             $sqlExpr = sprintf('BINARY %s', $sqlExpr);
@@ -111,23 +118,13 @@ class GeometryType extends Type
         return sprintf('ST_GeomFromWKB(%s, %d)', $sqlExpr, self::$srid);
     }
 
-    public function convertToPHPValueSQL($sqlExpr, $platform) : string
+    public function convertToPHPValueSQL(string $sqlExpr, AbstractPlatform $platform) : string
     {
         return sprintf('ST_AsBinary(%s)', $sqlExpr);
     }
 
-    public function canRequireSQLConversion() : bool
+    public function getBindingType() : ParameterType
     {
-        return true;
-    }
-
-    public function requiresSQLCommentHint(AbstractPlatform $platform) : bool
-    {
-        return true;
-    }
-
-    public function getBindingType() : int
-    {
-        return \PDO::PARAM_LOB;
+        return ParameterType::LARGE_OBJECT;
     }
 }

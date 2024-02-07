@@ -1,9 +1,95 @@
 <?php
 
 use Brick\Geo\Doctrine\Types;
+use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\DriverManager;
+use Doctrine\DBAL\Exception\DatabaseDoesNotExist;
+use Doctrine\DBAL\Platforms\PostgreSQLPlatform;
 use Doctrine\DBAL\Types\Type;
 
+const TEST_DATABASE = 'geo_tests';
+
+function createDoctrineConnection(bool $selectDatabase): Connection
+{
+    $env = getenv();
+
+    $requiredEnv = [
+        'DB_DRIVER',
+        'DB_HOST',
+        'DB_USER',
+        'DB_PASSWORD',
+    ];
+
+    $driver = $env['DB_DRIVER'] ?? null;
+    $host = $env['DB_HOST'] ?? null;
+    $port = $env['DB_PORT'] ?? null;
+    $user = $env['DB_USER'] ?? null;
+    $password = $env['DB_PASSWORD'] ?? null;
+
+    if ($driver === null || $host === null || $user === null || $password === null) {
+        $missingEnv = array_diff($requiredEnv, array_keys($env));
+
+        echo "Missing environment variables: ", PHP_EOL;
+        foreach ($missingEnv as $key) {
+            echo " - $key", PHP_EOL;
+        }
+        echo PHP_EOL;
+
+        echo "Example:", PHP_EOL;
+        echo 'DB_DRIVER=pdo_mysql DB_HOST=localhost DB_PORT=3306 DB_USER=root DB_PASSWORD=password vendor/bin/phpunit' , PHP_EOL;
+        echo PHP_EOL;
+
+        echo 'Available drivers:', PHP_EOL;
+        echo 'https://www.doctrine-project.org/projects/doctrine-dbal/en/latest/reference/configuration.html#driver', PHP_EOL;
+
+        exit(1);
+    }
+
+    $params = [
+        'driver' => $driver,
+        'host' => $host,
+        'user' => $user,
+        'password' => $password,
+    ];
+
+    if ($port !== null) {
+        $params['port'] = (int) $port;
+    }
+
+    if ($selectDatabase) {
+        $params['dbname'] = TEST_DATABASE;
+    }
+
+    $connection = DriverManager::getConnection($params);
+
+    if ($connection->getDatabasePlatform() instanceof PostgreSQLPlatform) {
+        $connection->executeStatement('CREATE EXTENSION IF NOT EXISTS postgis');
+    }
+
+    return $connection;
+}
+
 (function() {
+    $connection = createDoctrineConnection(selectDatabase: false);
+
+    echo "Database version: ", $connection->getServerVersion(), PHP_EOL;
+    echo "Database platform: ", get_class($connection->getDatabasePlatform()), PHP_EOL;
+
+    if ($connection->getDatabasePlatform() instanceof PostgreSQLPlatform) {
+        $version = $connection->executeQuery('SELECT PostGIS_Version()')->fetchOne();
+        echo 'PostGIS version: ', $version, PHP_EOL;
+    }
+
+    $schemaManager = $connection->createSchemaManager();
+
+    try {
+        $schemaManager->dropDatabase('geo_tests');
+    } catch (DatabaseDoesNotExist) {
+        // not an error!
+    }
+
+    $schemaManager->createDatabase('geo_tests');
+
     /** @var \Composer\Autoload\ClassLoader $classLoader */
     $classLoader = require 'vendor/autoload.php';
 
@@ -12,9 +98,11 @@ use Doctrine\DBAL\Types\Type;
         __DIR__ . '/vendor/doctrine/orm/tests/Doctrine/Tests',
         __DIR__ . '/vendor/doctrine/dbal/tests/Doctrine/Tests'
     ]);
+
     $classLoader->loadClass('Doctrine\Tests\DbalFunctionalTestCase');
     $classLoader->loadClass('Doctrine\Tests\DBAL\Mocks\MockPlatform');
 
+    // Register Doctrine types
     Type::addType('Geometry', Types\GeometryType::class);
     Type::addType('LineString', Types\LineStringType::class);
     Type::addType('MultiLineString', Types\MultiLineStringType::class);
@@ -22,80 +110,4 @@ use Doctrine\DBAL\Types\Type;
     Type::addType('MultiPolygon', Types\MultiPolygonType::class);
     Type::addType('Point', Types\PointType::class);
     Type::addType('Polygon', Types\PolygonType::class);
-
-    $driver = getenv('DRIVER');
-
-    if ($driver === false) {
-        echo 'Please set the database driver to use:' . PHP_EOL;
-        echo 'DRIVER={driver} vendor/bin/phpunit' . PHP_EOL;
-        echo 'Available drivers: PDO_MYSQL, PDO_PGSQL' . PHP_EOL;
-        exit(1);
-    } else {
-        switch ($driver) {
-            case 'PDO_MYSQL':
-                echo 'Using PDO_MYSQL driver' . PHP_EOL;
-
-                $pdo = new PDO('mysql:host=127.0.0.1;port=3306', 'root', '');
-                $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-                $pdo->exec('DROP DATABASE IF EXISTS geo_tests');
-                $pdo->exec('CREATE DATABASE geo_tests');
-
-                $statement = $pdo->query('SELECT VERSION()');
-                $version = $statement->fetchColumn();
-
-                echo 'MySQL version: ' . $version . PHP_EOL;
-
-                $GLOBALS['db_type'] = 'pdo_mysql';
-                $GLOBALS['db_host'] = '127.0.0.1';
-                $GLOBALS['db_port'] = 3306;
-                $GLOBALS['db_username'] = 'root';
-                $GLOBALS['db_password'] = '';
-                $GLOBALS['db_name'] = 'geo_tests';
-
-                // doctrine/dbal >= 2.13.0
-                $GLOBALS['db_driver'] = 'pdo_mysql';
-                $GLOBALS['db_user'] = 'root';
-                $GLOBALS['db_dbname'] = 'geo_tests';
-
-                break;
-
-            case 'PDO_PGSQL':
-                echo 'Using PDO_PGSQL driver' . PHP_EOL;
-
-                $pdo = new PDO('pgsql:host=localhost', 'postgres', 'postgres');
-                $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-                $pdo->exec('DROP DATABASE IF EXISTS geo_tests');
-                $pdo->exec('CREATE DATABASE geo_tests');
-
-                $statement = $pdo->query('SELECT version()');
-                $version = $statement->fetchColumn();
-
-                echo 'PostgreSQL version: ' . $version . PHP_EOL;
-
-                $statement = $pdo->query('SELECT PostGIS_Version()');
-                $version = $statement->fetchColumn();
-
-                echo 'PostGIS version: ' . $version . PHP_EOL;
-
-                $GLOBALS['db_type'] = 'pdo_pgsql';
-                $GLOBALS['db_host'] = 'localhost';
-                $GLOBALS['db_port'] = 5432;
-                $GLOBALS['db_username'] = 'postgres';
-                $GLOBALS['db_password'] = 'postgres';
-                $GLOBALS['db_name'] = 'geo_tests';
-
-                // doctrine/dbal >= 2.13.0
-                $GLOBALS['db_driver'] = 'pdo_pgsql';
-                $GLOBALS['db_user'] = 'postgres';
-                $GLOBALS['db_dbname'] = 'geo_tests';
-
-                break;
-
-            default:
-                echo 'Unknown driver: ' . $driver . PHP_EOL;
-                exit(1);
-        }
-    }
 })();

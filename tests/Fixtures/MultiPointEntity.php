@@ -5,32 +5,16 @@ declare(strict_types=1);
 namespace Brick\Geo\Doctrine\Tests\Fixtures;
 
 use Brick\Geo\MultiPoint;
+use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @Entity
- * @Table(name="multipoints")
- */
+#[ORM\Entity]
 class MultiPointEntity
 {
-    /**
-     * @Id
-     * @Column(type="integer")
-     * @GeneratedValue
-     */
-    private int $id;
+    #[ORM\Id]
+    #[ORM\Column(type: 'integer')]
+    #[ORM\GeneratedValue]
+    public int $id;
 
-    /**
-     * @Column(type="MultiPoint")
-     */
-    private MultiPoint $multiPoint;
-
-    public function getMultiPoint() : MultiPoint
-    {
-        return $this->multiPoint;
-    }
-
-    public function setMultiPoint(MultiPoint $multiPoint) : void
-    {
-        $this->multiPoint = $multiPoint;
-    }
+    #[ORM\Column(type: 'MultiPoint')]
+    public MultiPoint $multiPoint;
 }

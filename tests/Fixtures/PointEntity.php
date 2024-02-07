@@ -5,32 +5,16 @@ declare(strict_types=1);
 namespace Brick\Geo\Doctrine\Tests\Fixtures;
 
 use Brick\Geo\Point;
+use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @Entity
- * @Table(name="points")
- */
+#[ORM\Entity]
 class PointEntity
 {
-    /**
-     * @Id
-     * @Column(type="integer")
-     * @GeneratedValue
-     */
-    private int $id;
+    #[ORM\Id]
+    #[ORM\Column(type: 'integer')]
+    #[ORM\GeneratedValue]
+    public int $id;
 
-    /**
-     * @Column(type="Point")
-     */
-    private Point $point;
-
-    public function getPoint() : Point
-    {
-        return $this->point;
-    }
-
-    public function setPoint(Point $point) : void
-    {
-        $this->point = $point;
-    }
+    #[ORM\Column(type: 'Point')]
+    public Point $point;
 }
