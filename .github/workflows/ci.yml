@@ -74,7 +74,10 @@ jobs:
       - name: Run PHPUnit
         run: vendor/bin/phpunit
         env:
-          DRIVER: PDO_MYSQL
+          DB_DRIVER: pdo_mysql
+          DB_HOST: 127.0.0.1
+          DB_USER: root
+          DB_PASSWORD: ""
         if: ${{ matrix.php-version != env.COVERAGE_PHP_VERSION }}
 
       - name: Run PHPUnit with coverage
@@ -82,7 +85,10 @@ jobs:
           mkdir -p mkdir -p build/logs
           vendor/bin/phpunit --coverage-clover build/logs/clover.xml
         env:
-          DRIVER: PDO_MYSQL
+          DB_DRIVER: pdo_mysql
+          DB_HOST: 127.0.0.1
+          DB_USER: root
+          DB_PASSWORD: ""
         if: ${{ matrix.php-version == env.COVERAGE_PHP_VERSION }}
 
       - name: Upload coverage report to Coveralls
@@ -129,7 +135,10 @@ jobs:
           mkdir -p mkdir -p build/logs
           vendor/bin/phpunit --coverage-clover build/logs/clover.xml
         env:
-          DRIVER: PDO_MYSQL
+          DB_DRIVER: pdo_mysql
+          DB_HOST: 127.0.0.1
+          DB_USER: root
+          DB_PASSWORD: ""
 
       - name: Upload coverage report to Coveralls
         run: vendor/bin/php-coveralls --coverage_clover=build/logs/clover.xml -v
@@ -171,7 +180,10 @@ jobs:
           mkdir -p mkdir -p build/logs
           vendor/bin/phpunit --coverage-clover build/logs/clover.xml
         env:
-          DRIVER: PDO_PGSQL
+          DB_DRIVER: pdo_pgsql
+          DB_HOST: localhost
+          DB_USER: postgres
+          DB_PASSWORD: postgres
 
       - name: Upload coverage report to Coveralls
         run: vendor/bin/php-coveralls --coverage_clover=build/logs/clover.xml -v

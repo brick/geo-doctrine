@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Brick\Geo\Doctrine\Tests;
 
 use Brick\Geo\Point;
-use Brick\Geo\Doctrine\Tests\Fixtures;
 
 use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
 use Doctrine\Common\DataFixtures\FixtureInterface;
@@ -38,7 +37,7 @@ abstract class FunctionalTestCase extends TestCase
     {
         parent::setUp();
 
-        $this->connection = TestUtil::getConnection();
+        $this->connection = createDoctrineConnection(selectDatabase: true);
         $this->platform = $this->connection->getDatabasePlatform();
 
         $this->platform->registerDoctrineTypeMapping('geometry', 'binary');
@@ -48,10 +47,6 @@ abstract class FunctionalTestCase extends TestCase
         $this->platform->registerDoctrineTypeMapping('multipolygon', 'binary');
         $this->platform->registerDoctrineTypeMapping('point', 'binary');
         $this->platform->registerDoctrineTypeMapping('polygon', 'binary');
-
-        if ($this->platform instanceof PostgreSQLPlatform) {
-            $this->connection->executeQuery('CREATE EXTENSION IF NOT EXISTS postgis;');
-        }
 
         $this->fixtureLoader = new Loader();
 
