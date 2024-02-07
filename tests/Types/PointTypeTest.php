@@ -28,7 +28,7 @@ class PointTypeTest extends FunctionalTestCase
         $pointEntity = $repository->findOneBy([]);
         self::assertNotNull($pointEntity);
 
-        $point = $pointEntity->getPoint();
+        $point = $pointEntity->point;
         $this->assertPointEquals($point, 0.0, 0.0);
     }
 }

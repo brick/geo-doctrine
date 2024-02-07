@@ -11,7 +11,7 @@ use Brick\Geo\Proxy\PointProxy;
  */
 class PointType extends GeometryType
 {
-    public function getName() : string
+    protected function getGeometryName() : string
     {
         return 'Point';
     }

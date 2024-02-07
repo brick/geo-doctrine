@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.4.0](https://github.com/brick/geo-doctrine/releases/tag/0.4.0) - 2024-12-19
+
+💥 **Breaking changes**
+
+- compatibility with `doctrine/orm` `3.x` (`2.x` is no longer supported)
+- compatibility with `doctrine/dbal` `4.x` (`2.x` and `3.x` are no longer supported)
+
+🐛 **Bug fixes**
+
+- `GeometryType::convertToDatabaseValue()` now properly throws `ConversionException` as it should
+
 ## [0.3.1](https://github.com/brick/geo-doctrine/releases/tag/0.3.1) - 2024-06-07
 
 ✨ **Upgrades**

@@ -5,32 +5,16 @@ declare(strict_types=1);
 namespace Brick\Geo\Doctrine\Tests\Fixtures;
 
 use Brick\Geo\Polygon;
+use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @Entity
- * @Table(name="polygons")
- */
+#[ORM\Entity]
 class PolygonEntity
 {
-    /**
-     * @Id
-     * @Column(type="integer")
-     * @GeneratedValue
-     */
-    private int $id;
+    #[ORM\Id]
+    #[ORM\Column(type: 'integer')]
+    #[ORM\GeneratedValue]
+    public int $id;
 
-    /**
-     * @Column(type="Polygon")
-     */
-    private Polygon $polygon;
-
-    public function getPolygon() : Polygon
-    {
-        return $this->polygon;
-    }
-
-    public function setPolygon(Polygon $polygon) : void
-    {
-        $this->polygon = $polygon;
-    }
+    #[ORM\Column(type: 'Polygon')]
+    public Polygon $polygon;
 }

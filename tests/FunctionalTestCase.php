@@ -13,9 +13,10 @@ use Doctrine\Common\DataFixtures\Loader;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
+use Doctrine\DBAL\Platforms\PostgreSQLPlatform;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\ORMSetup;
 use Doctrine\ORM\Tools\SchemaTool;
-use Doctrine\ORM\Tools\Setup;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -48,17 +49,15 @@ abstract class FunctionalTestCase extends TestCase
         $this->platform->registerDoctrineTypeMapping('point', 'binary');
         $this->platform->registerDoctrineTypeMapping('polygon', 'binary');
 
-        switch ($this->platform->getName()) {
-            case 'postgresql':
-                $this->connection->executeQuery('CREATE EXTENSION IF NOT EXISTS postgis;');
-                break;
+        if ($this->platform instanceof PostgreSQLPlatform) {
+            $this->connection->executeQuery('CREATE EXTENSION IF NOT EXISTS postgis;');
         }
 
         $this->fixtureLoader = new Loader();
 
-        $config = Setup::createAnnotationMetadataConfiguration([__DIR__ . '/Fixtures'], false);
+        $config = ORMSetup::createAttributeMetadataConfiguration([__DIR__ . '/Fixtures']);
 
-        $this->em = EntityManager::create($this->connection, $config, $this->platform->getEventManager());
+        $this->em = new EntityManager($this->connection, $config);
         $schemaTool = new SchemaTool($this->em);
 
         $schemaTool->updateSchema([

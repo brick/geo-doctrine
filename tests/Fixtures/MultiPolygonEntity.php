@@ -5,32 +5,16 @@ declare(strict_types=1);
 namespace Brick\Geo\Doctrine\Tests\Fixtures;
 
 use Brick\Geo\MultiPolygon;
+use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @Entity
- * @Table(name="multipolygons")
- */
+#[ORM\Entity]
 class MultiPolygonEntity
 {
-    /**
-     * @Id
-     * @Column(type="integer")
-     * @GeneratedValue
-     */
-    private int $id;
+    #[ORM\Id]
+    #[ORM\Column(type: 'integer')]
+    #[ORM\GeneratedValue]
+    public int $id;
 
-    /**
-     * @Column(type="MultiPolygon")
-     */
-    private MultiPolygon $multiPolygon;
-
-    public function getMultiPolygon() : MultiPolygon
-    {
-        return $this->multiPolygon;
-    }
-
-    public function setMultiPolygon(MultiPolygon $multiPolygon) : void
-    {
-        $this->multiPolygon = $multiPolygon;
-    }
+    #[ORM\Column(type: 'MultiPolygon')]
+    public MultiPolygon $multiPolygon;
 }

@@ -11,7 +11,7 @@ use Brick\Geo\Proxy\MultiPolygonProxy;
  */
 class MultiPolygonType extends GeometryType
 {
-    public function getName() : string
+    protected function getGeometryName() : string
     {
         return 'MultiPolygon';
     }

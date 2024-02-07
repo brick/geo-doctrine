@@ -11,7 +11,7 @@ use Brick\Geo\Proxy\GeometryCollectionProxy;
  */
 class GeometryCollectionType extends GeometryType
 {
-    public function getName() : string
+    protected function getGeometryName() : string
     {
         return 'GeometryCollection';
     }

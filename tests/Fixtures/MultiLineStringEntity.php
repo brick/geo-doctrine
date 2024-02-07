@@ -5,32 +5,16 @@ declare(strict_types=1);
 namespace Brick\Geo\Doctrine\Tests\Fixtures;
 
 use Brick\Geo\MultiLineString;
+use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @Entity
- * @Table(name="multilinestrings")
- */
+#[ORM\Entity]
 class MultiLineStringEntity
 {
-    /**
-     * @Id
-     * @Column(type="integer")
-     * @GeneratedValue
-     */
-    private int $id;
+    #[ORM\Id]
+    #[ORM\Column(type: 'integer')]
+    #[ORM\GeneratedValue]
+    public int $id;
 
-    /**
-     * @Column(type="MultiLineString")
-     */
-    private MultiLineString $multiLineString;
-
-    public function getMultiLineString() : MultiLineString
-    {
-        return $this->multiLineString;
-    }
-
-    public function setMultiLineString(MultiLineString $multiLineString) : void
-    {
-        $this->multiLineString = $multiLineString;
-    }
+    #[ORM\Column(type: 'MultiLineString')]
+    public MultiLineString $multiLineString;
 }
