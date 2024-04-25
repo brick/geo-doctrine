@@ -19,7 +19,7 @@ jobs:
           php-version: "8.3"
 
       - name: Install composer dependencies
-        uses: "ramsey/composer-install@v2"
+        uses: ramsey/composer-install@v3
 
       - name: Run Psalm
         run: vendor/bin/psalm --show-info=false --find-unused-psalm-suppress --no-progress
@@ -62,7 +62,7 @@ jobs:
           coverage: xdebug
 
       - name: Install composer dependencies
-        uses: "ramsey/composer-install@v2"
+        uses: ramsey/composer-install@v3
         with:
           dependency-versions: ${{ matrix.deps }}
 
@@ -117,7 +117,7 @@ jobs:
           coverage: xdebug
 
       - name: Install composer dependencies
-        uses: "ramsey/composer-install@v2"
+        uses: ramsey/composer-install@v3
 
       - name: Run PHPUnit with coverage
         run: |
@@ -159,7 +159,7 @@ jobs:
           coverage: xdebug
 
       - name: Install composer dependencies
-        uses: "ramsey/composer-install@v2"
+        uses: ramsey/composer-install@v3
 
       - name: Run PHPUnit with coverage
         run: |
