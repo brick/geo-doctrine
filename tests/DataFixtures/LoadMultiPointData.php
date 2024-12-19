@@ -20,7 +20,7 @@ class LoadMultiPointData implements FixtureInterface
         $point3 = Point::xy(1,1);
 
         $multiPoint1 = new MultiPointEntity();
-        $multiPoint1->setMultiPoint(MultiPoint::of($point1, $point2, $point3));
+        $multiPoint1->multiPoint = MultiPoint::of($point1, $point2, $point3);
 
         $manager->persist($multiPoint1);
         $manager->flush();

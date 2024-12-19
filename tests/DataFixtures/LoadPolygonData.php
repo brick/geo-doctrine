@@ -25,7 +25,7 @@ class LoadPolygonData implements FixtureInterface
         $ring = LineString::of($point1, $point2, $point3, $point4, $point5);
 
         $poly1 = new PolygonEntity();
-        $poly1->setPolygon(Polygon::of($ring));
+        $poly1->polygon = Polygon::of($ring);
 
         $manager->persist($poly1);
         $manager->flush();

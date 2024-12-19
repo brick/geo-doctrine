@@ -30,7 +30,7 @@ class PolygonTypeTest extends FunctionalTestCase
         $polygonEntity = $repository->findOneBy(['id' => 1]);
         self::assertNotNull($polygonEntity);
 
-        $polygon = $polygonEntity->getPolygon();
+        $polygon = $polygonEntity->polygon;
         self::assertInstanceOf(Polygon::class, $polygon);
         self::assertSame(1, $polygon->count());
         self::assertInstanceOf(LineString::class, $polygon->exteriorRing());

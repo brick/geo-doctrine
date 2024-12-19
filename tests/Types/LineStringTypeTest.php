@@ -29,7 +29,7 @@ class LineStringTypeTest extends FunctionalTestCase
         $lineStringEntity = $repository->findOneBy(['id' => 1]);
         self::assertNotNull($lineStringEntity);
 
-        $lineString = $lineStringEntity->getLineString();
+        $lineString = $lineStringEntity->lineString;
         self::assertInstanceOf(LineString::class, $lineString);
         self::assertSame(3, $lineString->numPoints());
 
