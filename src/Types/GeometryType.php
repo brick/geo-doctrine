@@ -13,6 +13,7 @@ use Doctrine\DBAL\ParameterType;
 use Doctrine\DBAL\Platforms\AbstractMySQLPlatform;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Platforms\PostgreSQLPlatform;
+use Doctrine\DBAL\Types\ConversionException;
 use Doctrine\DBAL\Types\Exception\InvalidType;
 use Doctrine\DBAL\Types\Type;
 
@@ -76,6 +77,10 @@ class GeometryType extends Type
 
         if (is_resource($value)) {
             $value = stream_get_contents($value);
+
+            if ($value === false) {
+                throw new ConversionException('Failed to read stream contents.');
+            }
         }
 
         if ($this->hasKnownSubclasses()) {

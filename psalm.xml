@@ -15,13 +15,4 @@
             <directory name="vendor" />
         </ignoreFiles>
     </projectFiles>
-
-    <issueHandlers>
-        <DeprecatedConstant>
-            <errorLevel type="suppress">
-                <!-- We need to make it work with multiple ORM versions, so we won't address the deprecation for now -->
-                <file name="src/Functions/AbstractFunction.php" />
-            </errorLevel>
-        </DeprecatedConstant>
-    </issueHandlers>
 </psalm>
