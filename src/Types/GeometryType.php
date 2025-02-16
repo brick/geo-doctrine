@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Brick\Geo\Doctrine\Types;
 
-use Brick\DateTime\LocalDateTime;
 use Brick\Geo\Geometry;
 use Brick\Geo\IO\WKBReader;
 use Brick\Geo\Proxy\GeometryProxy;
