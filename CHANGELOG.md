@@ -4,7 +4,7 @@
 
 ✨ **Upgrades**
 
-- Compatibility with `brick/geo` version `0.12` and `0.13`
+- Compatibility with `brick/geo` version `0.12`
 
 ## [0.4.0](https://github.com/brick/geo-doctrine/releases/tag/0.4.0) - 2024-12-19
 
