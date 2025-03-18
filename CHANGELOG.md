@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.5.0](https://github.com/brick/geo-doctrine/releases/tag/0.5.0) - 2025-03-18
+
+✨ **Upgrades**
+
+- Compatibility with `brick/geo` version `0.13`
+
+💥 **Breaking changes**
+
+- No longer compatible with `brick/geo` versions `0.10`, `0.11` and `0.12`
+
 ## [0.4.1](https://github.com/brick/geo-doctrine/releases/tag/0.4.1) - 2025-03-18
 
 ✨ **Upgrades**

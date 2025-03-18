@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Brick\Geo\Doctrine\Types;
 
 use Brick\Geo\Geometry;
-use Brick\Geo\IO\WKBReader;
+use Brick\Geo\Io\WkbReader;
 use Brick\Geo\Proxy\GeometryProxy;
 use Brick\Geo\Proxy\ProxyInterface;
 use Doctrine\DBAL\ParameterType;
@@ -34,7 +34,7 @@ class GeometryType extends Type
      */
     public static int $srid = 0;
 
-    private ?WKBReader $wkbReader = null;
+    private ?WkbReader $wkbReader = null;
 
     /**
      * @psalm-return class-string<ProxyInterface&Geometry>
@@ -85,7 +85,7 @@ class GeometryType extends Type
         if ($this->hasKnownSubclasses()) {
             // Introspect the WKB to get the correct proxy class
             if ($this->wkbReader === null) {
-                $this->wkbReader = new WKBReader();
+                $this->wkbReader = new WkbReader();
             }
 
             return $this->wkbReader->readAsProxy($value, self::$srid);
