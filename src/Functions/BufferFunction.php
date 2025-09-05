@@ -9,12 +9,12 @@ namespace Brick\Geo\Doctrine\Functions;
  */
 class BufferFunction extends AbstractFunction
 {
-    protected function getSqlFunctionName(): string
+    protected function getSqlFunctionName() : string
     {
         return 'ST_Buffer';
     }
 
-    protected function getParameterCount(): int
+    protected function getParameterCount() : int
     {
         return 2;
     }

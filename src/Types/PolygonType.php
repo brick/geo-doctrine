@@ -11,12 +11,12 @@ use Brick\Geo\Proxy\PolygonProxy;
  */
 class PolygonType extends GeometryType
 {
-    protected function getGeometryName(): string
+    protected function getGeometryName() : string
     {
         return 'Polygon';
     }
 
-    protected function getProxyClassName(): string
+    protected function getProxyClassName() : string
     {
         return PolygonProxy::class;
     }

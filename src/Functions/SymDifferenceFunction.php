@@ -9,12 +9,12 @@ namespace Brick\Geo\Doctrine\Functions;
  */
 class SymDifferenceFunction extends AbstractFunction
 {
-    protected function getSqlFunctionName(): string
+    protected function getSqlFunctionName() : string
     {
         return 'ST_SymDifference';
     }
 
-    protected function getParameterCount(): int
+    protected function getParameterCount() : int
     {
         return 2;
     }

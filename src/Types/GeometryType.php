@@ -16,10 +16,6 @@ use Doctrine\DBAL\Types\ConversionException;
 use Doctrine\DBAL\Types\Exception\InvalidType;
 use Doctrine\DBAL\Types\Type;
 
-use function is_resource;
-use function sprintf;
-use function stream_get_contents;
-
 /**
  * Doctrine type for Geometry.
  */
@@ -40,7 +36,29 @@ class GeometryType extends Type
 
     private ?WkbReader $wkbReader = null;
 
-    public function getSQLDeclaration(array $column, AbstractPlatform $platform): string
+    /**
+     * @psalm-return class-string<ProxyInterface&Geometry>
+     */
+    protected function getProxyClassName() : string
+    {
+        return GeometryProxy::class;
+    }
+
+    /**
+     * Returns whether the associated geometry class has known (non-proxy) subclasses.
+     * If true, the WKB has to be introspected before the correct proxy class can be instantiated.
+     */
+    protected function hasKnownSubclasses() : bool
+    {
+        return true;
+    }
+
+    protected function getGeometryName() : string
+    {
+        return 'Geometry';
+    }
+
+    public function getSQLDeclaration(array $column, AbstractPlatform $platform) : string
     {
         if ($platform instanceof PostgreSQLPlatform) {
             return 'Geometry';
@@ -49,9 +67,9 @@ class GeometryType extends Type
         return $this->getGeometryName();
     }
 
-    public function convertToPHPValue($value, AbstractPlatform $platform): ?Geometry
+    public function convertToPHPValue($value, AbstractPlatform $platform) : ?Geometry
     {
-        /** @var resource|string|null $value */
+        /** @var string|resource|null $value */
         if ($value === null) {
             return null;
         }
@@ -78,7 +96,7 @@ class GeometryType extends Type
         return new $proxyClassName($value, true, self::$srid);
     }
 
-    public function convertToDatabaseValue($value, AbstractPlatform $platform): ?string
+    public function convertToDatabaseValue($value, AbstractPlatform $platform) : ?string
     {
         if ($value === null) {
             return null;
@@ -95,7 +113,7 @@ class GeometryType extends Type
         );
     }
 
-    public function convertToDatabaseValueSQL(string $sqlExpr, AbstractPlatform $platform): string
+    public function convertToDatabaseValueSQL(string $sqlExpr, AbstractPlatform $platform) : string
     {
         if ($platform instanceof AbstractMySQLPlatform) {
             $sqlExpr = sprintf('BINARY %s', $sqlExpr);
@@ -104,35 +122,13 @@ class GeometryType extends Type
         return sprintf('ST_GeomFromWKB(%s, %d)', $sqlExpr, self::$srid);
     }
 
-    public function convertToPHPValueSQL(string $sqlExpr, AbstractPlatform $platform): string
+    public function convertToPHPValueSQL(string $sqlExpr, AbstractPlatform $platform) : string
     {
         return sprintf('ST_AsBinary(%s)', $sqlExpr);
     }
 
-    public function getBindingType(): ParameterType
+    public function getBindingType() : ParameterType
     {
         return ParameterType::LARGE_OBJECT;
-    }
-
-    /**
-     * @psalm-return class-string<ProxyInterface&Geometry>
-     */
-    protected function getProxyClassName(): string
-    {
-        return GeometryProxy::class;
-    }
-
-    /**
-     * Returns whether the associated geometry class has known (non-proxy) subclasses.
-     * If true, the WKB has to be introspected before the correct proxy class can be instantiated.
-     */
-    protected function hasKnownSubclasses(): bool
-    {
-        return true;
-    }
-
-    protected function getGeometryName(): string
-    {
-        return 'Geometry';
     }
 }

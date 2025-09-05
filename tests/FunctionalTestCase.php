@@ -5,12 +5,14 @@ declare(strict_types=1);
 namespace Brick\Geo\Doctrine\Tests;
 
 use Brick\Geo\Point;
+
 use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\DataFixtures\Loader;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
+use Doctrine\DBAL\Platforms\PostgreSQLPlatform;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\ORMSetup;
 use Doctrine\ORM\Tools\SchemaTool;
@@ -60,29 +62,29 @@ abstract class FunctionalTestCase extends TestCase
             $this->em->getClassMetadata(Fixtures\MultiPointEntity::class),
             $this->em->getClassMetadata(Fixtures\MultiPolygonEntity::class),
             $this->em->getClassMetadata(Fixtures\PointEntity::class),
-            $this->em->getClassMetadata(Fixtures\PolygonEntity::class),
+            $this->em->getClassMetadata(Fixtures\PolygonEntity::class)
         ]);
 
         $purger = new ORMPurger();
         $this->ormExecutor = new ORMExecutor($this->em, $purger);
     }
 
-    protected function getEntityManager(): EntityManager
+    protected function getEntityManager() : EntityManager
     {
         return $this->em;
     }
 
-    protected function addFixture(FixtureInterface $fixture): void
+    protected function addFixture(FixtureInterface $fixture) : void
     {
         $this->fixtureLoader->addFixture($fixture);
     }
 
-    protected function loadFixtures(): void
+    protected function loadFixtures() : void
     {
         $this->ormExecutor->execute($this->fixtureLoader->getFixtures());
     }
 
-    protected function assertPointEquals(Point $point, float $x, float $y, ?float $z = null): void
+    protected function assertPointEquals(Point $point, float $x, float $y, ?float $z = null) : void
     {
         self::assertInstanceOf(Point::class, $point);
 

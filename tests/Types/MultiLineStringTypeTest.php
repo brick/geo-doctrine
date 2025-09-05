@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Brick\Geo\Doctrine\Tests\Types;
 
-use Brick\Geo\Doctrine\Tests\DataFixtures\LoadMultiLineStringData;
-use Brick\Geo\Doctrine\Tests\Fixtures\MultiLineStringEntity;
-use Brick\Geo\Doctrine\Tests\FunctionalTestCase;
 use Brick\Geo\LineString;
 use Brick\Geo\MultiLineString;
+use Brick\Geo\Doctrine\Tests\DataFixtures\LoadMultiLineStringData;
+use Brick\Geo\Doctrine\Tests\FunctionalTestCase;
+use Brick\Geo\Doctrine\Tests\Fixtures\MultiLineStringEntity;
 
 /**
  * Integrations tests for class MultiLineStringType.
@@ -22,7 +22,7 @@ class MultiLineStringTypeTest extends FunctionalTestCase
         $this->loadFixtures();
     }
 
-    public function testReadFromDbAndConvertToPHPValue(): void
+    public function testReadFromDbAndConvertToPHPValue() : void
     {
         $repository = $this->getEntityManager()->getRepository(MultiLineStringEntity::class);
 

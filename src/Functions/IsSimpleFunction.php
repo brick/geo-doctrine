@@ -9,12 +9,12 @@ namespace Brick\Geo\Doctrine\Functions;
  */
 class IsSimpleFunction extends AbstractFunction
 {
-    protected function getSqlFunctionName(): string
+    protected function getSqlFunctionName() : string
     {
         return 'ST_IsSimple';
     }
 
-    protected function getParameterCount(): int
+    protected function getParameterCount() : int
     {
         return 1;
     }

@@ -9,12 +9,12 @@ namespace Brick\Geo\Doctrine\Functions;
  */
 class EqualsFunction extends AbstractFunction
 {
-    protected function getSqlFunctionName(): string
+    protected function getSqlFunctionName() : string
     {
         return 'ST_Equals';
     }
 
-    protected function getParameterCount(): int
+    protected function getParameterCount() : int
     {
         return 2;
     }

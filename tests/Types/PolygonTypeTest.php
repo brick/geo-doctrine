@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Brick\Geo\Doctrine\Tests\Types;
 
-use Brick\Geo\Doctrine\Tests\DataFixtures\LoadPolygonData;
-use Brick\Geo\Doctrine\Tests\Fixtures\PolygonEntity;
-use Brick\Geo\Doctrine\Tests\FunctionalTestCase;
 use Brick\Geo\LineString;
 use Brick\Geo\Polygon;
+use Brick\Geo\Doctrine\Tests\DataFixtures\LoadPolygonData;
+use Brick\Geo\Doctrine\Tests\FunctionalTestCase;
+use Brick\Geo\Doctrine\Tests\Fixtures\PolygonEntity;
 
 /**
  * Integrations tests for class PolygonType.
@@ -22,7 +22,7 @@ class PolygonTypeTest extends FunctionalTestCase
         $this->loadFixtures();
     }
 
-    public function testReadFromDbAndConvertToPHPValue(): void
+    public function testReadFromDbAndConvertToPHPValue() : void
     {
         $repository = $this->getEntityManager()->getRepository(PolygonEntity::class);
 

@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Brick\Geo\Doctrine\Tests\Types;
 
-use Brick\Geo\Doctrine\Tests\DataFixtures\LoadMultiPointData;
-use Brick\Geo\Doctrine\Tests\Fixtures\MultiPointEntity;
-use Brick\Geo\Doctrine\Tests\FunctionalTestCase;
-use Brick\Geo\MultiPoint;
 use Brick\Geo\Point;
+use Brick\Geo\MultiPoint;
+use Brick\Geo\Doctrine\Tests\DataFixtures\LoadMultiPointData;
+use Brick\Geo\Doctrine\Tests\FunctionalTestCase;
+use Brick\Geo\Doctrine\Tests\Fixtures\MultiPointEntity;
 
 /**
  * Integrations tests for class MultiPointType.
@@ -22,7 +22,7 @@ class MultiPointTypeTest extends FunctionalTestCase
         $this->loadFixtures();
     }
 
-    public function testReadFromDbAndConvertToPHPValue(): void
+    public function testReadFromDbAndConvertToPHPValue() : void
     {
         $repository = $this->getEntityManager()->getRepository(MultiPointEntity::class);
 
