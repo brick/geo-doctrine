@@ -111,7 +111,7 @@ class GeometryType extends Type
 
     public function getBindingType(): ParameterType
     {
-        return ParameterType::LARGE_OBJECT;
+        return ParameterType::STRING;
     }
 
     /**

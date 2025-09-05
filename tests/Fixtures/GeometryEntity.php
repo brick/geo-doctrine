@@ -15,6 +15,6 @@ class GeometryEntity
     #[ORM\GeneratedValue]
     public int $id;
 
-    #[ORM\Column(type: 'Geometry')]
-    public Geometry $geometry;
+    #[ORM\Column(type: 'Geometry', length: 100000)]
+    public Geometry $geometry2;
 }
