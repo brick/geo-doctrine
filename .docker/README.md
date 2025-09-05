@@ -1,0 +1,55 @@
+# Docker environment
+
+This docker environment is designed to provide the developers with the ability to develop the library without the need to install locally any services or utilities besides `docker` and `docker compose`. Even `php` and `composer` are not needed to be installed locally.
+
+The environment can be built against any versions of the services. This comes handy both for development and testing purpose. Service versions are defined in the `.env` file.
+
+## Configuration
+```bash
+# Initialize environment variables file.
+cp .env.dist .env
+
+# Optionally adjust environment variables to your needs.
+vim .env
+```
+
+## Startup
+```bash
+docker compose up -d
+docker compose exec php bash
+
+# Now inside the container, install composer dependencies
+composer install
+```
+
+## Running tests
+
+Inside the `php` container:
+
+```bash
+# Run tests without a geometry engine
+vendor/bin/phpunit
+
+# Run tests with the GEOS extension
+ENGINE=geos vendor/bin/phpunit
+
+# Run tests with the geosop binary
+ENGINE=geosop vendor/bin/phpunit
+
+# Run tests with Postgres + PostGIS
+ENGINE=pdo_pgsql vendor/bin/phpunit
+
+# Run tests with MySQL
+ENGINE=pdo_mysql MYSQL_HOST=mysql vendor/bin/phpunit
+
+# Run tests with MariaDB
+ENGINE=pdo_mysql MYSQL_HOST=mariadb vendor/bin/phpunit
+
+# Run tests with SQLite + SpatiaLite
+ENGINE=sqlite3 vendor/bin/phpunit
+````
+
+## Shutdown
+```bash
+docker compose down
+```
