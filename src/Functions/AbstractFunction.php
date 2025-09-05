@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Brick\Geo\Doctrine\Functions;
 
 use Doctrine\ORM\Query\AST\Functions\FunctionNode;
+use Doctrine\ORM\Query\AST\Node;
 use Doctrine\ORM\Query\Parser;
 use Doctrine\ORM\Query\SqlWalker;
 use Doctrine\ORM\Query\TokenType;
@@ -15,15 +16,11 @@ use Doctrine\ORM\Query\TokenType;
 abstract class AbstractFunction extends FunctionNode
 {
     /**
-     * @var \Doctrine\ORM\Query\AST\Node[]
+     * @var Node[]
      */
     private array $args = [];
 
-    abstract protected function getSqlFunctionName() : string;
-
-    abstract protected function getParameterCount() : int;
-
-    public function getSql(SqlWalker $sqlWalker) : string
+    public function getSql(SqlWalker $sqlWalker): string
     {
         $sql = $this->getSqlFunctionName() . '(';
 
@@ -40,7 +37,7 @@ abstract class AbstractFunction extends FunctionNode
         return $sql;
     }
 
-    public function parse(Parser $parser) : void
+    public function parse(Parser $parser): void
     {
         $this->args = [];
 
@@ -60,4 +57,8 @@ abstract class AbstractFunction extends FunctionNode
 
         $parser->match(TokenType::T_CLOSE_PARENTHESIS);
     }
+
+    abstract protected function getSqlFunctionName(): string;
+
+    abstract protected function getParameterCount(): int;
 }

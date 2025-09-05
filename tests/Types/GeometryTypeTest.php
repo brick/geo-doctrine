@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Brick\Geo\Doctrine\Tests\Types;
 
+use Brick\Geo\Doctrine\Tests\DataFixtures\LoadGeometryData;
+use Brick\Geo\Doctrine\Tests\Fixtures\GeometryEntity;
+use Brick\Geo\Doctrine\Tests\FunctionalTestCase;
 use Brick\Geo\Point;
 use Brick\Geo\Proxy\ProxyInterface;
-use Brick\Geo\Doctrine\Tests\DataFixtures\LoadGeometryData;
-use Brick\Geo\Doctrine\Tests\FunctionalTestCase;
-use Brick\Geo\Doctrine\Tests\Fixtures\GeometryEntity;
 
 /**
  * Integrations tests for class GeometryType.
@@ -22,7 +22,7 @@ class GeometryTypeTest extends FunctionalTestCase
         $this->loadFixtures();
     }
 
-    public function testReadFromDbAndConvertToPHPValue() : void
+    public function testReadFromDbAndConvertToPHPValue(): void
     {
         $repository = $this->getEntityManager()->getRepository(GeometryEntity::class);
 

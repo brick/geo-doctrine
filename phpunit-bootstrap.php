@@ -1,6 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
 use Brick\Geo\Doctrine\Types;
+use Composer\Autoload\ClassLoader;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\DriverManager;
 use Doctrine\DBAL\Exception\DatabaseDoesNotExist;
@@ -29,13 +32,13 @@ function createDoctrineConnection(bool $selectDatabase): Connection
     if ($driver === null || $host === null || $user === null || $password === null) {
         $missingEnv = array_diff($requiredEnv, array_keys($env));
 
-        echo "Missing environment variables: ", PHP_EOL;
+        echo 'Missing environment variables: ', PHP_EOL;
         foreach ($missingEnv as $key) {
             echo " - $key", PHP_EOL;
         }
         echo PHP_EOL;
 
-        echo "Example:", PHP_EOL;
+        echo 'Example:', PHP_EOL;
         echo 'DB_DRIVER=pdo_mysql DB_HOST=localhost DB_PORT=3306 DB_USER=root DB_PASSWORD=password vendor/bin/phpunit' , PHP_EOL;
         echo PHP_EOL;
 
@@ -69,11 +72,11 @@ function createDoctrineConnection(bool $selectDatabase): Connection
     return $connection;
 }
 
-(function() {
+(function (): void {
     $connection = createDoctrineConnection(selectDatabase: false);
 
-    echo "Database version: ", $connection->getServerVersion(), PHP_EOL;
-    echo "Database platform: ", get_class($connection->getDatabasePlatform()), PHP_EOL;
+    echo 'Database version: ', $connection->getServerVersion(), PHP_EOL;
+    echo 'Database platform: ', get_class($connection->getDatabasePlatform()), PHP_EOL;
 
     if ($connection->getDatabasePlatform() instanceof PostgreSQLPlatform) {
         $version = $connection->executeQuery('SELECT PostGIS_Version()')->fetchOne();
@@ -90,13 +93,13 @@ function createDoctrineConnection(bool $selectDatabase): Connection
 
     $schemaManager->createDatabase('geo_tests');
 
-    /** @var \Composer\Autoload\ClassLoader $classLoader */
+    /** @var ClassLoader $classLoader */
     $classLoader = require 'vendor/autoload.php';
 
     // Add namespace for doctrine base tests
     $classLoader->addPsr4('Doctrine\\Tests\\', [
         __DIR__ . '/vendor/doctrine/orm/tests/Doctrine/Tests',
-        __DIR__ . '/vendor/doctrine/dbal/tests/Doctrine/Tests'
+        __DIR__ . '/vendor/doctrine/dbal/tests/Doctrine/Tests',
     ]);
 
     $classLoader->loadClass('Doctrine\Tests\DbalFunctionalTestCase');

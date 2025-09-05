@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Brick\Geo\Doctrine\Tests\Types;
 
 use Brick\Geo\Doctrine\Tests\DataFixtures\LoadPointData;
-use Brick\Geo\Doctrine\Tests\FunctionalTestCase;
 use Brick\Geo\Doctrine\Tests\Fixtures\PointEntity;
+use Brick\Geo\Doctrine\Tests\FunctionalTestCase;
 
 /**
  * Integrations tests for class PointType.
@@ -20,7 +20,7 @@ class PointTypeTest extends FunctionalTestCase
         $this->loadFixtures();
     }
 
-    public function testReadFromDbAndConvertToPHPValue() : void
+    public function testReadFromDbAndConvertToPHPValue(): void
     {
         $repository = $this->getEntityManager()->getRepository(PointEntity::class);
 

@@ -9,12 +9,12 @@ namespace Brick\Geo\Doctrine\Functions;
  */
 class ContainsFunction extends AbstractFunction
 {
-    protected function getSqlFunctionName() : string
+    protected function getSqlFunctionName(): string
     {
         return 'ST_Contains';
     }
 
-    protected function getParameterCount() : int
+    protected function getParameterCount(): int
     {
         return 2;
     }

@@ -9,12 +9,12 @@ namespace Brick\Geo\Doctrine\Functions;
  */
 class IsClosedFunction extends AbstractFunction
 {
-    protected function getSqlFunctionName() : string
+    protected function getSqlFunctionName(): string
     {
         return 'ST_IsClosed';
     }
 
-    protected function getParameterCount() : int
+    protected function getParameterCount(): int
     {
         return 1;
     }

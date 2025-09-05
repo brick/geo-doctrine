@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace Brick\Geo\Doctrine\Tests\DataFixtures;
 
-use Brick\Geo\Point;
 use Brick\Geo\Doctrine\Tests\Fixtures\GeometryEntity;
-
+use Brick\Geo\Point;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 

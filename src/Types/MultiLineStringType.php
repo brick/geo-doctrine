@@ -11,17 +11,17 @@ use Brick\Geo\Proxy\MultiLineStringProxy;
  */
 class MultiLineStringType extends GeometryType
 {
-    protected function getGeometryName() : string
+    protected function getGeometryName(): string
     {
         return 'MultiLineString';
     }
 
-    protected function getProxyClassName() : string
+    protected function getProxyClassName(): string
     {
         return MultiLineStringProxy::class;
     }
 
-    protected function hasKnownSubclasses() : bool
+    protected function hasKnownSubclasses(): bool
     {
         return false;
     }

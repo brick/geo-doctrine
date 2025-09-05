@@ -9,12 +9,12 @@ namespace Brick\Geo\Doctrine\Functions;
  */
 class DisjointFunction extends AbstractFunction
 {
-    protected function getSqlFunctionName() : string
+    protected function getSqlFunctionName(): string
     {
         return 'ST_Disjoint';
     }
 
-    protected function getParameterCount() : int
+    protected function getParameterCount(): int
     {
         return 2;
     }

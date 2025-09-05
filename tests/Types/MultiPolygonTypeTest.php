@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Brick\Geo\Doctrine\Tests\Types;
 
-use Brick\Geo\LineString;
-use Brick\Geo\Polygon;
-use Brick\Geo\MultiPolygon;
 use Brick\Geo\Doctrine\Tests\DataFixtures\LoadMultiPolygonData;
-use Brick\Geo\Doctrine\Tests\FunctionalTestCase;
 use Brick\Geo\Doctrine\Tests\Fixtures\MultiPolygonEntity;
+use Brick\Geo\Doctrine\Tests\FunctionalTestCase;
+use Brick\Geo\LineString;
+use Brick\Geo\MultiPolygon;
+use Brick\Geo\Polygon;
 
 /**
  * Integrations tests for class MultiPolygonType.
@@ -23,7 +23,7 @@ class MultiPolygonTypeTest extends FunctionalTestCase
         $this->loadFixtures();
     }
 
-    public function testReadFromDbAndConvertToPHPValue() : void
+    public function testReadFromDbAndConvertToPHPValue(): void
     {
         $repository = $this->getEntityManager()->getRepository(MultiPolygonEntity::class);
 
