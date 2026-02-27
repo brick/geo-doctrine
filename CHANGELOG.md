@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.5.1](https://github.com/brick/geo-doctrine/releases/tag/0.5.1) - 2026-02-27
+
+🐛 **Bug fixes**
+
+- Geometry types now implement `getMappedDatabaseTypes()`, fixing a schema comparison error with `doctrine/dbal` `4.3`+
+
+✨ **New features**
+
+- Thanks to `getMappedDatabaseTypes()`, calling `$platform->registerDoctrineTypeMapping()` manually is no longer necessary
+
 ## [0.5.0](https://github.com/brick/geo-doctrine/releases/tag/0.5.0) - 2025-03-18
 
 ✨ **Upgrades**
