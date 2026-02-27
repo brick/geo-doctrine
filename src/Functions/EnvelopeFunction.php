@@ -9,7 +9,7 @@ use Override;
 /**
  * Envelope() function.
  */
-class EnvelopeFunction extends AbstractFunction
+final class EnvelopeFunction extends AbstractFunction
 {
     #[Override]
     protected function getSqlFunctionName(): string

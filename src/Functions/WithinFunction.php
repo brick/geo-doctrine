@@ -9,7 +9,7 @@ use Override;
 /**
  * Within() function.
  */
-class WithinFunction extends AbstractFunction
+final class WithinFunction extends AbstractFunction
 {
     #[Override]
     protected function getSqlFunctionName(): string

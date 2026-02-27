@@ -9,7 +9,7 @@ use Override;
 /**
  * Difference() function.
  */
-class DifferenceFunction extends AbstractFunction
+final class DifferenceFunction extends AbstractFunction
 {
     #[Override]
     protected function getSqlFunctionName(): string

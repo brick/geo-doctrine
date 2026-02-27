@@ -9,7 +9,7 @@ use Override;
 /**
  * Equals() function.
  */
-class EqualsFunction extends AbstractFunction
+final class EqualsFunction extends AbstractFunction
 {
     #[Override]
     protected function getSqlFunctionName(): string

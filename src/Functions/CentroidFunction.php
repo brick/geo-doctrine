@@ -9,7 +9,7 @@ use Override;
 /**
  * Centroid() function.
  */
-class CentroidFunction extends AbstractFunction
+final class CentroidFunction extends AbstractFunction
 {
     #[Override]
     protected function getSqlFunctionName(): string

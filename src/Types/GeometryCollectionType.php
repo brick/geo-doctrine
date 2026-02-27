@@ -10,7 +10,7 @@ use Override;
 /**
  * Doctrine type for GeometryCollection.
  */
-class GeometryCollectionType extends GeometryType
+final class GeometryCollectionType extends GeometryType
 {
     #[Override]
     protected function getGeometryName(): string

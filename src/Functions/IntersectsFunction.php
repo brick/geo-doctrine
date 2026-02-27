@@ -9,7 +9,7 @@ use Override;
 /**
  * Intersects() function.
  */
-class IntersectsFunction extends AbstractFunction
+final class IntersectsFunction extends AbstractFunction
 {
     #[Override]
     protected function getSqlFunctionName(): string

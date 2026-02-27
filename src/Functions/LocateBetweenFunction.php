@@ -9,7 +9,7 @@ use Override;
 /**
  * LocateBetween() function.
  */
-class LocateBetweenFunction extends AbstractFunction
+final class LocateBetweenFunction extends AbstractFunction
 {
     #[Override]
     protected function getSqlFunctionName(): string

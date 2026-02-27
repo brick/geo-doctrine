@@ -9,7 +9,7 @@ use Override;
 /**
  * SnapToGrid() function.
  */
-class SnapToGridFunction extends AbstractFunction
+final class SnapToGridFunction extends AbstractFunction
 {
     #[Override]
     protected function getSqlFunctionName(): string

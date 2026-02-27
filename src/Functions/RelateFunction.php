@@ -9,7 +9,7 @@ use Override;
 /**
  * Relate() function.
  */
-class RelateFunction extends AbstractFunction
+final class RelateFunction extends AbstractFunction
 {
     #[Override]
     protected function getSqlFunctionName(): string

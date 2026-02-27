@@ -9,7 +9,7 @@ use Override;
 /**
  * PointOnSurface() function.
  */
-class PointOnSurfaceFunction extends AbstractFunction
+final class PointOnSurfaceFunction extends AbstractFunction
 {
     #[Override]
     protected function getSqlFunctionName(): string

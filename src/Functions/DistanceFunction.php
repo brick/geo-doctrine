@@ -9,7 +9,7 @@ use Override;
 /**
  * Distance() function.
  */
-class DistanceFunction extends AbstractFunction
+final class DistanceFunction extends AbstractFunction
 {
     #[Override]
     protected function getSqlFunctionName(): string

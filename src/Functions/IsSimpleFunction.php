@@ -9,7 +9,7 @@ use Override;
 /**
  * IsSimple() function.
  */
-class IsSimpleFunction extends AbstractFunction
+final class IsSimpleFunction extends AbstractFunction
 {
     #[Override]
     protected function getSqlFunctionName(): string

@@ -9,7 +9,7 @@ use Override;
 /**
  * Union() function.
  */
-class UnionFunction extends AbstractFunction
+final class UnionFunction extends AbstractFunction
 {
     #[Override]
     protected function getSqlFunctionName(): string

@@ -10,7 +10,7 @@ use Override;
 /**
  * Doctrine type for MultiPoint.
  */
-class MultiPointType extends GeometryType
+final class MultiPointType extends GeometryType
 {
     #[Override]
     protected function getGeometryName(): string

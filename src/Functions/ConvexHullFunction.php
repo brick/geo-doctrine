@@ -9,7 +9,7 @@ use Override;
 /**
  * ConvexHull() function.
  */
-class ConvexHullFunction extends AbstractFunction
+final class ConvexHullFunction extends AbstractFunction
 {
     #[Override]
     protected function getSqlFunctionName(): string

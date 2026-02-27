@@ -9,7 +9,7 @@ use Override;
 /**
  * Contains() function.
  */
-class ContainsFunction extends AbstractFunction
+final class ContainsFunction extends AbstractFunction
 {
     #[Override]
     protected function getSqlFunctionName(): string

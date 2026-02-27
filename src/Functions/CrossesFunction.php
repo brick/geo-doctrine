@@ -9,7 +9,7 @@ use Override;
 /**
  * Crosses() function.
  */
-class CrossesFunction extends AbstractFunction
+final class CrossesFunction extends AbstractFunction
 {
     #[Override]
     protected function getSqlFunctionName(): string

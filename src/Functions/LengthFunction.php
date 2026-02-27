@@ -9,7 +9,7 @@ use Override;
 /**
  * Length() function.
  */
-class LengthFunction extends AbstractFunction
+final class LengthFunction extends AbstractFunction
 {
     #[Override]
     protected function getSqlFunctionName(): string

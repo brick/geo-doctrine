@@ -10,7 +10,7 @@ use Override;
 /**
  * Doctrine type for Polygon.
  */
-class PolygonType extends GeometryType
+final class PolygonType extends GeometryType
 {
     #[Override]
     protected function getGeometryName(): string

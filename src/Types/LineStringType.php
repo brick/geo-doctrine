@@ -10,7 +10,7 @@ use Override;
 /**
  * Doctrine type for LineString.
  */
-class LineStringType extends GeometryType
+final class LineStringType extends GeometryType
 {
     #[Override]
     protected function getGeometryName(): string

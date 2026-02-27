@@ -9,7 +9,7 @@ use Override;
 /**
  * Boundary() function.
  */
-class BoundaryFunction extends AbstractFunction
+final class BoundaryFunction extends AbstractFunction
 {
     #[Override]
     protected function getSqlFunctionName(): string

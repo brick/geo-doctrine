@@ -9,7 +9,7 @@ use Override;
 /**
  * Disjoint() function.
  */
-class DisjointFunction extends AbstractFunction
+final class DisjointFunction extends AbstractFunction
 {
     #[Override]
     protected function getSqlFunctionName(): string

@@ -9,7 +9,7 @@ use Override;
 /**
  * Buffer() function.
  */
-class BufferFunction extends AbstractFunction
+final class BufferFunction extends AbstractFunction
 {
     #[Override]
     protected function getSqlFunctionName(): string

@@ -9,7 +9,7 @@ use Override;
 /**
  * Azimuth() function.
  */
-class AzimuthFunction extends AbstractFunction
+final class AzimuthFunction extends AbstractFunction
 {
     #[Override]
     protected function getSqlFunctionName(): string

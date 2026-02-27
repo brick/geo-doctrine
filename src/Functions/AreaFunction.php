@@ -9,7 +9,7 @@ use Override;
 /**
  * Area() function.
  */
-class AreaFunction extends AbstractFunction
+final class AreaFunction extends AbstractFunction
 {
     #[Override]
     protected function getSqlFunctionName(): string

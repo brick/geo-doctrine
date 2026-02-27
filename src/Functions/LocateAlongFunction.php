@@ -9,7 +9,7 @@ use Override;
 /**
  * LocateAlong() function.
  */
-class LocateAlongFunction extends AbstractFunction
+final class LocateAlongFunction extends AbstractFunction
 {
     #[Override]
     protected function getSqlFunctionName(): string

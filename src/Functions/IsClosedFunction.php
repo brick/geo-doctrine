@@ -9,7 +9,7 @@ use Override;
 /**
  * IsClosed() function.
  */
-class IsClosedFunction extends AbstractFunction
+final class IsClosedFunction extends AbstractFunction
 {
     #[Override]
     protected function getSqlFunctionName(): string

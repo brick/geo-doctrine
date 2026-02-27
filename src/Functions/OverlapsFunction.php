@@ -9,7 +9,7 @@ use Override;
 /**
  * Overlaps() function.
  */
-class OverlapsFunction extends AbstractFunction
+final class OverlapsFunction extends AbstractFunction
 {
     #[Override]
     protected function getSqlFunctionName(): string

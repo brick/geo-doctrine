@@ -10,7 +10,7 @@ use Override;
 /**
  * Doctrine type for Point.
  */
-class PointType extends GeometryType
+final class PointType extends GeometryType
 {
     #[Override]
     protected function getGeometryName(): string

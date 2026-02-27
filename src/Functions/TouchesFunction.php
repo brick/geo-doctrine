@@ -9,7 +9,7 @@ use Override;
 /**
  * Touches() function.
  */
-class TouchesFunction extends AbstractFunction
+final class TouchesFunction extends AbstractFunction
 {
     #[Override]
     protected function getSqlFunctionName(): string

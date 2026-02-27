@@ -9,7 +9,7 @@ use Override;
 /**
  * MaxDistance() function.
  */
-class MaxDistanceFunction extends AbstractFunction
+final class MaxDistanceFunction extends AbstractFunction
 {
     #[Override]
     protected function getSqlFunctionName(): string
