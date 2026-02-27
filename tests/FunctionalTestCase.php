@@ -10,7 +10,6 @@ use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\DataFixtures\Loader;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\ORMSetup;
 use Doctrine\ORM\Tools\SchemaTool;
@@ -23,8 +22,6 @@ use const PHP_VERSION_ID;
  */
 abstract class FunctionalTestCase extends TestCase
 {
-    private AbstractPlatform $platform;
-
     private Loader $fixtureLoader;
 
     private EntityManager $em;
@@ -38,15 +35,6 @@ abstract class FunctionalTestCase extends TestCase
         parent::setUp();
 
         $this->connection = createDoctrineConnection(selectDatabase: true);
-        $this->platform = $this->connection->getDatabasePlatform();
-
-        $this->platform->registerDoctrineTypeMapping('geometry', 'binary');
-        $this->platform->registerDoctrineTypeMapping('linestring', 'binary');
-        $this->platform->registerDoctrineTypeMapping('multilinestring', 'binary');
-        $this->platform->registerDoctrineTypeMapping('multipoint', 'binary');
-        $this->platform->registerDoctrineTypeMapping('multipolygon', 'binary');
-        $this->platform->registerDoctrineTypeMapping('point', 'binary');
-        $this->platform->registerDoctrineTypeMapping('polygon', 'binary');
 
         $this->fixtureLoader = new Loader();
 

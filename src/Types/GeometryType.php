@@ -20,6 +20,7 @@ use Override;
 use function is_resource;
 use function sprintf;
 use function stream_get_contents;
+use function strtolower;
 
 /**
  * Doctrine type for Geometry.
@@ -119,6 +120,20 @@ class GeometryType extends Type
     public function getBindingType(): ParameterType
     {
         return ParameterType::LARGE_OBJECT;
+    }
+
+    #[Override]
+    public function getMappedDatabaseTypes(AbstractPlatform $platform): array
+    {
+        if ($platform instanceof AbstractMySQLPlatform) {
+            return [strtolower($this->getGeometryName())];
+        }
+
+        if ($platform instanceof PostgreSQLPlatform && static::class === self::class) {
+            return ['geometry'];
+        }
+
+        return [];
     }
 
     /**
