@@ -16,6 +16,8 @@ use Doctrine\ORM\ORMSetup;
 use Doctrine\ORM\Tools\SchemaTool;
 use PHPUnit\Framework\TestCase;
 
+use const PHP_VERSION_ID;
+
 /**
  * Base class for Doctrine types functional test cases.
  */
@@ -49,6 +51,10 @@ abstract class FunctionalTestCase extends TestCase
         $this->fixtureLoader = new Loader();
 
         $config = ORMSetup::createAttributeMetadataConfiguration([__DIR__ . '/Fixtures']);
+
+        if (PHP_VERSION_ID >= 80400) {
+            $config->enableNativeLazyObjects(true);
+        }
 
         $this->em = new EntityManager($this->connection, $config);
         $schemaTool = new SchemaTool($this->em);
