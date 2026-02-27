@@ -9,6 +9,7 @@ use Doctrine\ORM\Query\AST\Node;
 use Doctrine\ORM\Query\Parser;
 use Doctrine\ORM\Query\SqlWalker;
 use Doctrine\ORM\Query\TokenType;
+use Override;
 
 /**
  * Base class for Doctrine functions.
@@ -20,6 +21,7 @@ abstract class AbstractFunction extends FunctionNode
      */
     private array $args = [];
 
+    #[Override]
     public function getSql(SqlWalker $sqlWalker): string
     {
         $sql = $this->getSqlFunctionName() . '(';
@@ -37,6 +39,7 @@ abstract class AbstractFunction extends FunctionNode
         return $sql;
     }
 
+    #[Override]
     public function parse(Parser $parser): void
     {
         $this->args = [];

@@ -15,6 +15,7 @@ use Doctrine\DBAL\Platforms\PostgreSQLPlatform;
 use Doctrine\DBAL\Types\ConversionException;
 use Doctrine\DBAL\Types\Exception\InvalidType;
 use Doctrine\DBAL\Types\Type;
+use Override;
 
 use function is_resource;
 use function sprintf;
@@ -40,6 +41,7 @@ class GeometryType extends Type
 
     private ?WkbReader $wkbReader = null;
 
+    #[Override]
     public function getSQLDeclaration(array $column, AbstractPlatform $platform): string
     {
         if ($platform instanceof PostgreSQLPlatform) {
@@ -49,6 +51,7 @@ class GeometryType extends Type
         return $this->getGeometryName();
     }
 
+    #[Override]
     public function convertToPHPValue($value, AbstractPlatform $platform): ?Geometry
     {
         /** @var resource|string|null $value */
@@ -78,6 +81,7 @@ class GeometryType extends Type
         return new $proxyClassName($value, true, self::$srid);
     }
 
+    #[Override]
     public function convertToDatabaseValue($value, AbstractPlatform $platform): ?string
     {
         if ($value === null) {
@@ -95,6 +99,7 @@ class GeometryType extends Type
         );
     }
 
+    #[Override]
     public function convertToDatabaseValueSQL(string $sqlExpr, AbstractPlatform $platform): string
     {
         if ($platform instanceof AbstractMySQLPlatform) {
@@ -104,11 +109,13 @@ class GeometryType extends Type
         return sprintf('ST_GeomFromWKB(%s, %d)', $sqlExpr, self::$srid);
     }
 
+    #[Override]
     public function convertToPHPValueSQL(string $sqlExpr, AbstractPlatform $platform): string
     {
         return sprintf('ST_AsBinary(%s)', $sqlExpr);
     }
 
+    #[Override]
     public function getBindingType(): ParameterType
     {
         return ParameterType::LARGE_OBJECT;
