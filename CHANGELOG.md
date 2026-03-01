@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.6.0](https://github.com/brick/geo-doctrine/releases/tag/0.6.0) - 2026-03-01
+
+💥 **Breaking changes**
+
+- Minimum PHP version is now `8.2`
+
 ## [0.5.1](https://github.com/brick/geo-doctrine/releases/tag/0.5.1) - 2026-02-27
 
 🐛 **Bug fixes**
