@@ -138,7 +138,7 @@ class GeometryType extends Type
     }
 
     /**
-     * @return class-string<ProxyInterface&Geometry>
+     * @return class-string<Geometry&ProxyInterface>
      */
     protected function getProxyClassName(): string
     {
