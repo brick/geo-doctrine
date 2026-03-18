@@ -19,8 +19,8 @@
         "doctrine/cache": "^1.11",
         "doctrine/data-fixtures": "^1.7",
         "guzzlehttp/guzzle": "^7.0",
+        "phpstan/phpstan": "2.1.42",
         "phpunit/phpunit": "^11.5",
-        "vimeo/psalm": "6.15.1",
         "symfony/cache": "^5.0 || ^6.0 || ^7.0"
     },
     "autoload": {

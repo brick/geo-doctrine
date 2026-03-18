@@ -54,7 +54,7 @@ abstract class AbstractFunction extends FunctionNode
                 $parser->match(TokenType::T_COMMA);
             }
 
-            /** @psalm-suppress InvalidPropertyAssignmentValue */
+            // @phpstan-ignore assign.propertyType
             $this->args[] = $parser->ArithmeticPrimary();
         }
 

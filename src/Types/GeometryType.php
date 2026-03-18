@@ -68,6 +68,7 @@ class GeometryType extends Type
             }
         }
 
+        /** @var string $value */
         if ($this->hasKnownSubclasses()) {
             // Introspect the WKB to get the correct proxy class
             if ($this->wkbReader === null) {
@@ -137,7 +138,7 @@ class GeometryType extends Type
     }
 
     /**
-     * @psalm-return class-string<ProxyInterface&Geometry>
+     * @return class-string<ProxyInterface&Geometry>
      */
     protected function getProxyClassName(): string
     {
